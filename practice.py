@@ -17,8 +17,8 @@ def print_list(items):
         3
         9
     """
-
-    print "the wrong thing"
+    for item in items:
+        print item
 
 
 def long_words(words):
@@ -37,8 +37,9 @@ def long_words(words):
         >>> long_words(["all", "are", "tiny"])
         []
     """
+    
 
-    return ['the wrong thing']
+    return [word for word in words if len(word) > 4]
 
 
 def n_long_words(words, n):
@@ -56,7 +57,7 @@ def n_long_words(words, n):
         ['apples', 'bananas']
     """
 
-    return ['the wrong thing']
+    return [word for word in words if len(word) > n]
 
 
 def smallest_int(numbers):
@@ -77,8 +78,10 @@ def smallest_int(numbers):
         >>> smallest_int([]) is None
         True
     """
-
-    return 100
+    if numbers:
+        return sorted(numbers)[0]
+    else:
+        return None    
 
 
 def largest_int(numbers):
@@ -100,7 +103,10 @@ def largest_int(numbers):
         True
     """
 
-    return 0
+    if numbers:
+        return sorted(numbers)[-1]
+    else:
+        return None    
 
 
 def halvesies(numbers):
@@ -118,7 +124,7 @@ def halvesies(numbers):
         [0.5, 2.5]
     """
 
-    return []
+    return [float(number)/2 for number in numbers]
 
 
 def word_lengths(words):
@@ -130,7 +136,7 @@ def word_lengths(words):
         [5, 3, 5, 4]
     """
 
-    return []
+    return [len(word) for word in words]
 
 
 def sum_numbers(numbers):
@@ -149,8 +155,12 @@ def sum_numbers(numbers):
         >>> sum_numbers([])
         0
     """
+    sum = 0
 
-    return None
+    for number in numbers:
+        sum += number
+
+    return sum
 
 
 def mult_numbers(numbers):
@@ -172,8 +182,12 @@ def mult_numbers(numbers):
         >>> mult_numbers([])
         1
     """
+    product = 1
 
-    return None
+    for number in numbers:    
+        product *= number
+
+    return product
 
 
 def join_strings(words):
@@ -192,8 +206,12 @@ def join_strings(words):
         >>> join_strings([])
         ''
     """
+    combined_word = ""
 
-    return "Not the right thing"
+    for word in words:
+        combined_word += word
+        
+    return combined_word
 
 
 def average(numbers):
@@ -215,8 +233,16 @@ def average(numbers):
     (Think of the best way to handle an empty input list, though,
     a feel free to provide a good solution here.)
     """
+    total = 0
 
-    return 0
+    if not numbers:
+        print "Error! The input list is empty!"
+        return 0
+    else:    
+        for number in numbers:
+            total += number
+        average = float(total)/len(numbers)     
+        return average
 
 
 def join_strings_with_comma(words):
@@ -235,8 +261,16 @@ def join_strings_with_comma(words):
         >>> join_strings_with_comma(["Pretzel"])
         'Pretzel'
     """
-
-    return ""
+    combined_word = ""
+    for i in range(len(words)):
+        if len(words) == 1:
+            combined_word += words[i]
+        else:    
+            if i < len(words) - 1:
+                combined_word = combined_word + words[i] + ", "
+            else:
+                combined_word += words[i]    
+    return combined_word
 
 
 def reverse_list(items):
@@ -262,7 +296,7 @@ def reverse_list(items):
         ['apple', 'berry', 'cherry']
     """
 
-    return []
+    return items[::-1]
 
 
 def reverse_list_in_place(items):
@@ -287,8 +321,15 @@ def reverse_list_in_place(items):
         >>> orig
         ['I', 'love', 'cookies']
     """
-
-    return []
+    length = len(items)
+    hiindex = length - 1
+    mid_index = length/2
+    for i in xrange(0,mid_index):
+        temp = items[hiindex]
+        items[hiindex] = items[i]
+        items[i] = temp
+        hiindex -= 1
+    return None    
 
 
 def duplicates(items):
@@ -316,8 +357,8 @@ def duplicates(items):
         >>> orig
         ['apple', 'apple', 'berry']
     """
-
-    return []
+    from collections import Counter
+    return sorted([item for item,count in Counter(items).items() if count > 1])
 
 
 def find_letter_indices(words, letter):
@@ -346,8 +387,17 @@ def find_letter_indices(words, letter):
     ("o" does not appear in "jumps", so the result for that input is
     `None`.)
     """
+    letter_indices = []
+    for word in words:
+        if letter in word:
+            for i in xrange(len(word)):
+                if word[i] == letter:
+                    letter_indices.append(i)
+        else:
+            letter_indices.append(None)            
+        
 
-    return []
+    return letter_indices
 
 #####################################################################
 # END OF PRACTICE: You can ignore everything below.
