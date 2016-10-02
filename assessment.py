@@ -115,8 +115,6 @@ def largest_n_items(items, n):
         >>> largest_n_items([3, 3, 3, 2, 1], 2)
         [3, 3]
     """
-    largest_n = []
-    ascending = sorted(items)
     if n > 0:   
         return sorted(items)[-n:]
     else:
