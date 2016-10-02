@@ -262,10 +262,7 @@ def join_strings_with_comma(words):
         'Pretzel'
     """
     combined_word = ""
-    for i in range(len(words)):
-        if len(words) == 1:
-            combined_word += words[i]
-        else:    
+    for i in xrange(len(words)):   
             if i < len(words) - 1:
                 combined_word = combined_word + words[i] + ", "
             else:
